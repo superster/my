@@ -1,0 +1,347 @@
+// JavaScript Document
+  $(document).ready(function () {
+	  //mini cart overflow fix
+
+	  // up down button if content is less than 500px in height
+var height = $("#cartOverflow").height();
+	if ( height <= 400) {
+$("#cartOverflow").css("paddingRight", "0px;");
+}
+
+  //If store is GRC/CYP, Increasing image width&heigth and incresing panel length
+  var storeCode = document.getElementsByName('flp:store');
+  for (var i=0; i<storeCode.length; i++) {
+      var store = (storeCode[i].content);
+      if (store == "GRC" || store == "CYP") {
+          $('li#caterogyItem a img').each(function () {
+              this.style.setProperty('width', '150px', 'important');
+              this.style.setProperty('height', '150px', 'important');
+              this.style.setProperty('position', 'relative', 'important');
+              this.style.setProperty('left', '15px', 'important');
+          });
+          $('li#caterogyItem').css("min-height", "500px");
+      }
+  }
+
+  //if Lang is Hebrew, align text right
+  var language = document.getElementsByName('flp:language');
+  for (var i=0; i<language.length; i++) {
+  var lang = (language[i].content);
+  if (lang == "iw"){
+  //$("p,h1,h2,h3,h4,h5,h6,i,b,dt,ol").css("direction", "rtl");
+
+      $('ul#megaMenu li,.productPrice,#forgotPassword,#distributorJoinNow,#loginUsername,#loginPassword').css("text-align", "right");
+      $('.logInText input[type="submit"]').css("margin-right", "0px");
+
+      $( 'ul#megaMenu li .mm-content-base' ).each(function () {
+          this.style.setProperty( 'width', '220px', 'important' );
+      });
+      //$(".mm-content-base ul li a, .navigation .mm-content-base ul h2").css("margin-right", "16px");
+
+	  $("p,h1,h2,h3,h4,h5,h6,i,b,dt,ol,ul,.productValue").css("direction", "rtl")
+			  .filter(function (index) {
+					return index == 1 || $(this).hasClass("utility_links");
+				  })
+			  .css("direction", "ltr");
+
+      $( '.productPrice' ).each(function () {
+          this.style.setProperty( 'direction', 'ltr', 'important' );
+      });
+      $("#megaMenu").css("direction", "ltr");
+
+
+  }}
+  //lang align text
+  $(".copyright").css("direction", "ltr");
+  });
+
+
+//start copyright
+function ThisYear()
+{
+	document.write( new Date().getFullYear() );
+}
+//end copyright
+
+//start printing and swapping product list
+function printProducts() {
+
+document.getElementById('productList').style.maxHeight = '900000px';
+window.print();
+
+setTimeout("restoreProductWindow()", 5000);  // 5 seconds
+}
+
+function restoreProductWindow(){
+
+document.getElementById('productList').style.maxHeight = '500px';
+
+}
+
+
+
+
+
+//reset carousel buttons for recommended items
+function setButtons() {
+setTimeout("resetHeight()", 100);
+}
+function resetHeight () {
+window.location.reload();
+}
+
+function getParams() {
+var idx = document.URL.indexOf('?');
+var params = new Array();
+if (idx != -1) {
+var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+for (var i=0; i<pairs.length; i++) {
+nameVal = pairs[i].split('=');
+params[nameVal[0]] = nameVal[1];
+   }
+}
+return params;
+}
+params = getParams();
+
+progress = unescape(params["progress"]);
+
+//title start
+function progressDisplay(){
+progress = unescape(params["progress"]);document.write(""+ progress +"");
+
+
+}
+//end title
+
+function displayProgressImage(){
+
+document.write("<img src='media/images/content/aloeProgressImages/"+ progress +".png' alt='aloe Plant' border='0' width='155' height='170'  />");
+
+}
+
+//  End getting url details-->
+
+//start the specific CC placement for the next promotion progress animation
+
+
+
+function displayingTheCC (progress){
+if (progress ==  "1"){
+document.getElementById('displayCC').style.bottom='-8px';
+}
+if (progress ==  "2"){
+document.getElementById('displayCC').style.bottom='-3px';
+}
+if (progress ==  "3"){
+document.getElementById('displayCC').style.bottom='5px';
+}
+if (progress ==  "4"){
+document.getElementById('displayCC').style.bottom='15px';
+}
+if (progress ==  "5"){
+document.getElementById('displayCC').style.bottom='23px';
+}
+if (progress ==  "6"){
+document.getElementById('displayCC').style.bottom='31px';
+}
+if (progress ==  "7"){
+document.getElementById('displayCC').style.bottom='40px';
+}
+if (progress ==  "8"){
+document.getElementById('displayCC').style.bottom='48px';
+}
+if (progress ==  "9"){
+document.getElementById('displayCC').style.bottom='56px';
+}
+if (progress ==  "10"){
+document.getElementById('displayCC').style.bottom='64px';
+}
+if (progress ==  "11"){
+document.getElementById('displayCC').style.bottom='74px';
+}
+if (progress ==  "12"){
+document.getElementById('displayCC').style.bottom='84px';
+}
+if (progress ==  "13"){
+document.getElementById('displayCC').style.bottom='92px';
+}
+if (progress ==  "14"){
+document.getElementById('displayCC').style.bottom='100px';
+}
+if (progress ==  "15"){
+document.getElementById('displayCC').style.bottom='108px';
+}
+if (progress ==  "16"){
+document.getElementById('displayCC').style.bottom='116px';
+}
+if (progress ==  "17"){
+document.getElementById('displayCC').style.bottom='124px';
+}
+if (progress ==  "18"){
+document.getElementById('displayCC').style.bottom='132px';
+}
+if (progress ==  "19"){
+document.getElementById('displayCC').style.bottom='140px';
+}
+if (progress ==  "20"){
+document.getElementById('displayCC').style.bottom='148px';
+}
+
+}
+
+//end CC placement
+
+
+//start calendar progress bar
+
+var monthOneBar1Height = "80";
+var monthOneBar2Height = "50";
+
+function monthOneBar1Progress (){
+document.write
+("<div id='monthOneBar1' style='height:" + monthOneBar1Height + "px; bottom:-56px;'></div><div id='monthOneBar2' style='height:" + monthOneBar2Height + "px; bottom:-56px;'></div>");
+}
+
+var monthTwoBar1Height = "100";
+var monthTwoBar2Height = "70";
+function monthTwoBar1Progress (){
+document.write
+("<div id='monthTwoBar1' style='height:" + monthTwoBar1Height + "px; bottom:-56px;'></div><div id='monthTwoBar2' style='height:" + monthTwoBar2Height + "px; bottom:-56px;'></div>");
+}
+
+var monthThreeBar1Height = "85";
+var monthThreeBar2Height = "65";
+function monthThreeBar1Progress (){
+document.write
+("<div id='monthThreeBar1' style='height:" + monthThreeBar1Height + "px; bottom:-56px;'></div><div id='monthThreeBar2' style='height:" + monthThreeBar2Height + "px; bottom:-56px;'></div>");
+}
+
+
+
+
+//end calendar progress bar
+
+
+//<!--Pop-up Window Control-->
+function openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//<!--Swap Images Function-->
+
+
+
+//start show message
+
+
+function showMessage() {
+document.getElementById("message").style.display="block";
+setTimeout("hideMessage()", 5000);  // 5 seconds
+}
+function hideMessage() {
+document.getElementById("message").style.display="none";
+
+}
+
+
+
+
+//end show message
+
+
+function changeParentLocation() {
+    //document.frm1.submit();
+	document.location=url;
+   // self.parent.location.href = 'productPage.html';
+	top.window.close();
+    //return true;
+}
+
+
+function closeMessage(messageBox)
+{
+var i,x,y,ARRcookies=document.cookie.split(";");
+for (i=0;i<ARRcookies.length;i++)
+  {
+  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+  x=x.replace(/^\s+|\s+$/g,"");
+  if (x==messageBox)
+    {
+    return unescape(y);
+    }
+  }
+}
+
+function setCookie(messageBox,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=messageBox + "=" + c_value;
+}
+
+
+function noMessage(){
+
+var messageBox = "boxClosed"
+
+
+}
+
+
+function checkMessageCookie()
+{
+var messageOff=closeMessage("messageOff");
+if (messageOff!=null && messageOff!="")
+  {
+
+  document.getElementById('messagePopUp').style.display = 'none';
+  }
+else
+  {
+
+  messageOff=document.getElementById('messagePopUp').style.display = 'block';
+  if (messageOff!=null && messageOff!="")
+    {
+    setCookie("messageOff",messageOff,1);
+    }
+  }
+}
+
+$(document).ready( function (){//anything that needs to load after the document goes under here...
+
+var changeSec = $("a[rel^=shadowbox]").addClass('outSide');
+$('a.outSide').each(function() {
+var hrefOut = $(this).attr('href');
+var hrefOut = hrefOut.replace('http://','https://');
+$(this).attr('href', hrefOut);
+});
+
+
+//start shopping progress module uopdate june 2, 2014
+
+$("ul#progressModule > li > img").each(function () {
+
+    var progImg = $("ul#progressModule > li > img").attr("src");
+    var lastCut = progImg.lastIndexOf("/");
+
+    progImg = progImg.substring(lastCut + 1);
+
+    if (progImg == "progressBar_0.png") {
+        $(this).parent().addClass("progYellow");
+        $(this).remove();
+    }
+
+    if (progImg == "progressBar_1.png") {
+        $(this).parent().addClass("progGrey");
+        $(this).remove();
+    }
+
+});// end each
+
+});//end document.ready
+
+
+//end close message
+

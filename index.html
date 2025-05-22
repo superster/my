@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://shop.foreverliving.com/distribNew/MyReports.do -->
+<html class="" lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+  <script src="./index_files/166502073747401" async=""></script><script async="" src="./index_files/fbevents.js.download"></script><script type="text/javascript" async="" src="./index_files/js"></script><script type="text/javascript" async="" src="./index_files/js(1)"></script><script type="text/javascript" async="" src="./index_files/analytics.js.download"></script><script async="" src="./index_files/gtm.js.download"></script><script>
+    dataLayer = [{
+      'pageCategory': 'signup',
+      'visitorType': 'high-value'
+    }];
+  </script>
+
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NH6BHZT');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Ohter scripts that are not dataLayer related such as js -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=1020"><meta name="application-name" content="FLPI FBO Portal"><meta name="flp:store" content="BGD" data-company="BGD" data-label="Bangladesh"><meta name="flp:language" content="en" data-label="English"><meta name="flp:member" content="880400054119" data-company="BGD" data-operating="BGD"><meta name="flp:siteCreationEligible" content="360 Site Creation Eligibility" data-eligible="Y"><meta name="flp:action" content="/MyReports"><title>My Reports</title><link rel="shortcut icon" href="https://www.foreverliving.com/favicon.ico"><link rel="stylesheet" href="./index_files/jquery-ui.css" type="text/css"><link rel="stylesheet" href="./index_files/style.css" type="text/css"><link rel="stylesheet" href="./index_files/shadowbox.css" type="text/css"><link rel="stylesheet" href="./index_files/cookie.css" type="text/css"><style type="text/css">
+div.reports div.tabWrapper div.eg-bar button {
+    border: none;
+    height: 16px;
+    text-indent: 0.7em;
+    background: url(images/expand.png) no-repeat;
+}
+div.reports.spanned div.tabWrapper div.eg-bar button {
+    background: url(images/contract.png) no-repeat;
+}
+div.reports.spanning div.tabWrapper div.eg-bar button {
+    background: url(images/spanning.gif) no-repeat;
+}
+</style><script type="text/javascript" src="./index_files/jquery.min.js.download"></script><script type="text/javascript" src="./index_files/jquery-ui.js.download"></script><script type="text/javascript" src="./index_files/common.js.download"></script><script type="text/javascript" src="./index_files/jquery.cookie.js.download"></script><script type="text/javascript" src="./index_files/jquery.cycle.all.min.js.download"></script><script type="text/javascript" src="./index_files/plugins.js.download"></script><script type="text/javascript" src="./index_files/script.js.download"></script><script type="text/javascript" src="./index_files/shadowbox.js.download"></script><script type="text/javascript" src="./index_files/animatedcollapse.js.download"></script><script type="text/javascript" src="./index_files/stepcarousel.js.download"></script><script type="text/javascript" src="./index_files/jquery.selectboxes.pack.js.download"></script><script type="text/javascript" src="./index_files/jqueryCarousel.js.download"></script><script type="text/javascript" src="./index_files/common.js.download"></script><script type="text/javascript" src="./index_files/cookie.js.download"></script><script type="text/javascript">
+$(document).ready(function () {
+    $.ajaxSetup({
+        success: function(response, status, xhr) {
+            $("form[name='loginForm']").each(function() {
+                location.reload(true);
+            });
+        },
+        statusCode : {
+            401: function() {
+                location.reload(true);
+            }
+        }
+    });
+
+    
+
+    $(document).ajaxSuccess(function(event, xhr, ajax) {
+        try{
+            if( ajax.url.indexOf('/home/warnings.jsp') == -1 ) {
+                    $('#messagePopUp').load("/distribNew/home/warnings.jsp",function(){
+                    var numWarnings = $(this).find('.warning-message').length;
+                    $('.noticeMessages').text(numWarnings)[numWarnings > 0?'show':'hide']();
+                });
+            }
+        }catch(x){
+            if(console && console.log) {
+                console.log(x);
+            }
+        }
+    });
+
+    /* Tooltips */
+    $("#username").tipped({
+        source:"<p>Assistant Supervisor<br/>880400054119<br/></p>"
+    });
+
+    if( $('#messagePopUp .warning-message').length) {
+        checkMessageCookie();
+    }
+});
+</script><link rel="prefetch"></head>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body onload="" class="eupopup eupopup-bottom eupopup-style-compact"><input type="hidden" name="flp360Access" value="{&quot;countryName&quot;:&quot;Bangladesh&quot;,&quot;country&quot;:&quot;BGD&quot;,&quot;flp360Access&quot;:&quot;Y&quot;}" id="flp360Access">
+
+<script type="text/javascript" src="./index_files/distrib-360.js.download"></script>
+
+
+
+<script type="text/javascript">
+$(function() {
+    $(".bonusTabs").tabs({
+      //cookie: {
+        // store cookie for a day, without, it would be a session cookie
+        //expires: 7
+      //}
+    });
+
+    $('div.reports').bind('togglespan',function(event,options){
+        var $reports = $(this).addClass('spanning'),
+            $storeInfo = $reports.find('.storeInfo')
+        ;
+        $storeInfo.slideToggle(
+                (options && (options.duration == 0 || options.duration)) ? options.duration : 300, function(){
+                    $reports.toggleClass('spanned',$storeInfo.is(':visible')).removeClass('spanning');
+                }
+        );
+    }).find(':button').click(function(event){
+        $(this).closest('div.reports').trigger('togglespan');
+    });
+
+    $( window.location.hash && window.location.hash.length ? window.location.hash : "div#BGD" ).each(function(){
+        var $this = $(this);
+        if( $this.find('.storeInfo:hidden').length ) {
+            $this.trigger('togglespan');
+            if( !window.location.hash || window.location.hash.length == 0) {
+                $(window).scrollTop( $this.offset().top );
+            }
+        }
+    });
+});
+
+</script>
+
+
+
+<!-- Google Tag Manager (noscript) should be right after the opening body tag -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NH6BHZT"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <div class="container">
+                <header>
+                        
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<div class="utility_bar">
+    <ul class="utility_links">
+    
+
+        <li class="first">
+             <div class="noticeMessages" style="display: none;" onclick="document.getElementById(&#39;messagePopUp&#39;).style.display = &#39;block&#39;;">0</div>
+        </li>
+
+        
+            
+                <li><a href="https://shop.foreverliving.com/distribNew/Cart.do" class="icon_cart">View Cart</a></li>
+            
+            <li>
+                <a class="icon_contact" href="https://shop.foreverliving.com/distribNew/ContactUs.do">Contact Us</a>
+            </li>
+            <li>
+                <a class="icon_help" href="https://shop.foreverliving.com/distribNew/Faq.do">Help</a>
+            </li>
+            <li>
+                <a class="icon_logging" href="https://shop.foreverliving.com/distribNew/Logout.do">Logout</a>
+            </li>
+        
+    </ul>
+
+    <ul class="language_links" id="languageLinks" style="display: block;">
+        <li class="first mm-item"><a href="https://shop.foreverliving.com/distribNew/MyReports.do#" class="mm-item-link"><span>Bangladesh</span><span></span></a>
+            <div class="mm-item-content country_selector" id="itemSelect" style="display: none;"><div class="mm-content-base">
+                <span style="font-weight: bold; float: right;">
+                    <a href="https://shop.foreverliving.com/distribNew/MyReports.do#" id="closeCountryMenu"><img src="./index_files/closeMessage.png" alt="close" border="0"></a>
+                </span>
+                <br>
+                
+                    <ul>
+                        <li><h2>ASIA</h2></li>
+                        
+                            <li>
+                                <a href="https://shop.foreverliving.com/distribNew/MyReports.do?store=BGD"><span>BANGLADESH</span></a>
+                            </li>
+                            
+                            
+                                
+                            
+                        
+                    </ul>
+                    
+                        
+                    
+                
+            </div></div>
+        </li>
+        <li class="mm-item"><a href="https://shop.foreverliving.com/distribNew/MyReports.do#" class="mm-item-link">English<span></span></a>
+            <div class="mm-item-content language_selector" style="display: none;"><div class="mm-content-base">
+                <ul>
+                    
+                        
+                    
+                </ul>
+            </div></div>
+        </li>
+    </ul>
+
+</div>
+
+
+<!-- This script is required to close the menu. This is because the mega menu deactivation_action has been unplugged. -->
+<script>
+    $(function() {
+        $("#closeCountryMenu").click(function (e) {
+            e.stopPropagation();
+            var mm_item_link_obj = $("#closeCountryMenu").closest(".mm-item").find(".mm-item-link")
+            var mm_item_content_obj = $("#closeCountryMenu").closest("div.mm-item-content");
+            mm_item_content_obj.hide();
+            mm_item_link_obj.removeClass("mm-item-link-hover");
+        });
+    });
+</script>
+
+
+
+
+
+
+<div class="header">
+
+    <div id="messagePopUp" class="standardPadding messagePopUps" style="margin-left:29%; display:none;">
+        
+    </div>
+
+    <form name="searchForm" id="productSearch" method="post" action="https://shop.foreverliving.com/distribNew/Search.do">
+        <input type="hidden" name="flp360Enabled" value="true" id="flp360Enabled">
+        <ul class="global_search" id="globalSearch">
+            <li class="welcome" id="username" title="">Hi,&nbsp;MST.ROSNA&nbsp;
+                    
+                   BEGUM</li>
+            
+                <li class="search_field"><input type="text" name="keyword" value=""></li>
+                <li class="search_input"><input type="submit" value="Search"></li>
+            
+        </ul>
+    </form>
+    <a href="https://shop.foreverliving.com/distribNew/Home.do" class="logo">Forever Living Products</a>
+</div>
+
+
+
+
+<nav>
+    <div class="navigation">
+        <ul class="megamenu" id="megaMenu">
+            <li class="mm-item">
+                <a href="https://shop.foreverliving.com/distribNew/Home.do" class="mm-item-link">Home<span></span></a>
+            </li>
+            
+                
+                    <li class="mm-item">
+                        <a href="https://shop.foreverliving.com/distribNew/GetStarted.do" class="mm-item-link">Getting Started<span></span></a>
+                        
+                            <div class="mm-item-content" style="display: none;"><div class="mm-content-base">
+                                
+                                
+                                    
+                                        <ul>
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/This%20is%20Forever.do">This is Forever</a></li>
+                                              
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/Get%20Connected.do">Get Connected</a></li>
+                                              
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/Our%20Mission.do">Our Mission</a></li>
+                                              
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/Tools.do">Tools</a></li>
+                                              
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/Getting%20Started.do">Getting Started</a></li>
+                                              
+                                            
+                                        </ul>
+                                    
+                                    
+                                
+                            </div></div>
+                        
+                    </li>
+                
+            
+                
+                    <li class="mm-item">
+                        <a href="https://shop.foreverliving.com/distribNew/Shop.do" class="mm-item-link">Shop Now<span></span></a>
+                        
+                            <div class="mm-item-content" style="display: none;"><div class="mm-content-base">
+                                
+                                
+                                    
+                                    
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2></h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/QuickOrderCategories.do">Quick Order Forms</a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2>Categories Group</h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=New_Products">New Products and Literature</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=TopSellers">Top Sellers</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Drinks">Drinks</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Nutrition">Nutrition</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Weight%20Management">Weight Management</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Bee%20Products">Bee Products</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Personal%20Care">Personal Care</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Skin%20Care">Skin Care</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Business%20Paks">Business Paks</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Combo%20Paks">Combo Paks</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ViewCategory.do?category=Literature">Literature</a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                    
+                                
+                            </div></div>
+                        
+                    </li>
+                
+            
+                
+                    <li class="current mm-item">
+                        <a href="https://shop.foreverliving.com/distribNew/MyBusiness.do" class="mm-item-link">My Business<span></span></a>
+                        
+                            <div class="mm-item-content" style="display: none;"><div class="mm-content-base">
+                                
+                                
+                                    
+                                    
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2>Group</h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyVolume.do">My Volume</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyDownline.do">My Downline</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyReports.do">My Reports</a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2>Tools</h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyFlpBiz.do"></a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyCustomers.do">My Customers</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyNextLevel.do"></a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2>Information</h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/FormsAndDownloads.do">Forms And Downloads</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/Incentives.do">Incentives</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/How%20To%20Buy.do"></a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                    
+                                
+                            </div></div>
+                        
+                    </li>
+                
+            
+                
+                    <li class="mm-item">
+                        <a href="https://shop.foreverliving.com/distribNew/News.do" class="mm-item-link">News<span></span></a>
+                        
+                            <div class="mm-item-content" style="display: none;"><div class="mm-content-base">
+                                
+                                
+                                    
+                                    
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2>News Group</h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/FindMeeting.do">Find Meeting</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/Calendar.do">Calendar</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/Events.do">Events</a></li>
+                                                  
+                                                
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/Videos.do">Videos</a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                    
+                                
+                            </div></div>
+                        
+                    </li>
+                
+            
+                
+                    <li class="mm-item">
+                        <a href="https://shop.foreverliving.com/distribNew/Training.do" class="mm-item-link">Training<span></span></a>
+                        
+                    </li>
+                
+            
+                
+                    <li class="mm-item">
+                        <a href="https://shop.foreverliving.com/distribNew/Support.do" class="mm-item-link">Support<span></span></a>
+                        
+                            <div class="mm-item-content" style="display: none;"><div class="mm-content-base">
+                                
+                                
+                                    
+                                        <ul>
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/WorldLocations.do">Global Offices</a></li>
+                                              
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/Faq.do">FAQ</a></li>
+                                              
+                                            
+                                              
+                                                 <li><a href="https://shop.foreverliving.com/distribNew/ContactUs.do">Contact Us</a></li>
+                                              
+                                            
+                                        </ul>
+                                    
+                                    
+                                
+                            </div></div>
+                        
+                    </li>
+                
+            
+                
+                    <li class="mm-item">
+                        <a href="https://shop.foreverliving.com/distribNew/MyAccount.do" class="mm-item-link">My Account<span></span></a>
+                        
+                            <div class="mm-item-content" style="display: none;"><div class="mm-content-base">
+                                
+                                
+                                    
+                                    
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2>Global</h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyProfile.do">My Profile</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/SecurityPrefs.do">Security Settings</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MemberApplication.do">Online Application Form</a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                            <ul>
+                                                <li>
+                                                    <h2>Local</h2>
+                                                </li>
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/StoreProfile.do">My Preferences</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/OrderHistory.do">Order History</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/AddressBook.do">Address Book</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/MyWallet.do">My Wallet</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/IdCard.do">ID Card</a></li>
+                                                  
+                                                
+                                                  
+                                                       <li><a href="https://shop.foreverliving.com/distribNew/ExpressCheckout.do">Express Checkout</a></li>
+                                                  
+                                                
+                                            </ul>
+                                        
+                                    
+                                
+                            </div></div>
+                        
+                    </li>
+                
+            
+                
+            
+                
+            
+        </ul>
+    </div>
+</nav></header>
+                <div class="wrapperExtended">
+                    
+
+
+
+
+
+<div class="breadcrumb">
+    <p>
+        <a href="https://shop.foreverliving.com/distribNew/Home.do">Home</a>
+        
+            / <a href="https://shop.foreverliving.com/distribNew/MyBusiness.do">My Business</a>
+         
+            / <a href="https://shop.foreverliving.com/distribNew/MyReports.do">My Reports</a>
+         
+    </p>
+</div>
+<div id="content" class="two">
+                        <div class="left-rail">
+                                
+
+
+
+    
+    
+        <div class="module sub_nav">
+            <h2>
+                <a style="" class="current" href="https://shop.foreverliving.com/distribNew/MyBusiness.do">My Business</a>
+            </h2>
+
+            <div class="hr"><hr></div>
+
+            
+                
+                
+                    
+                    
+                        
+                            <h3>Group</h3>
+                            <ul>
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/MyVolume.do">My Volume</a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/MyDownline.do">My Downline</a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="current" href="https://shop.foreverliving.com/distribNew/MyReports.do">My Reports</a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                            <div class="hr"><hr></div>
+                        
+                            <h3>Tools</h3>
+                            <ul>
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/MyFlpBiz.do"></a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/MyCustomers.do">My Customers</a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/MyNextLevel.do"></a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                            <div class="hr"><hr></div>
+                        
+                            <h3>Information</h3>
+                            <ul>
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/FormsAndDownloads.do">Forms And Downloads</a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/Incentives.do">Incentives</a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                                    
+                                        <li>
+
+
+                                            <a class="" href="https://shop.foreverliving.com/distribNew/How%20To%20Buy.do"></a>
+
+
+                                            
+                                        </li>
+                                    
+                                
+                            </ul>
+                            <div class="hr"><hr></div>
+                        
+                    
+                
+            
+        </div>
+    
+
+</div>
+                        <div class="main">
+                            <h1>Bonus Recaps</h1>
+
+    <!--start message-->
+    <div id="standard_CMS"></div>
+    <!--end message-->
+
+    <div id="BGD" class="reports spanned">
+                <span style="float: right;">
+                    February 5, 2025 12:00 AM</span>
+    
+                <div class="tabWrapper" style="clear: both;">
+                    <div class="eg-bar">
+                        <button type="button">
+                            <img src="https://images.foreverliving.com/flags/BGD_flag_Xsm.gif" alt="BGD" border="0" class="inputSpecs">
+                            </button>
+                        <br style="clear: both;">
+                        <strong>Bangladesh</strong>
+                            </div>
+        
+                    <div style="" id="bonusTable-BGD" class="storeInfo">
+                        <!--results table-->
+                        <div id="bonusTabs0" class="bonusTabs ui-tabs ui-widget ui-widget-content ui-corner-all">
+                                  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                                    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="https://shop.foreverliving.com/distribNew/MyReports.do#bonus-BGD-1">Bonus Recaps</a></li>
+                                    </ul>
+                                  <div id="bonus-BGD-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+                                        <div class="hr"><hr></div><!-- Horizontal Rule -->
+                                        <dl><dt>
+                                                <a href="https://shop.foreverliving.com/distribNew/MemberReport.do?uid=34228990&amp;company=BGD" target="_blank">BONUS RECAP&nbsp;February 2025</a></dt>
+                                        <dt>
+                                                <a href="https://shop.foreverliving.com/distribNew/MemberReport.do?uid=33852032&amp;company=BGD" target="_blank">BONUS RECAP&nbsp;November 2024</a></dt>
+                                        <dt>
+                                                <a href="https://shop.foreverliving.com/distribNew/MemberReport.do?uid=32535493&amp;company=BGD" target="_blank">BONUS RECAP&nbsp;November 2023</a></dt>
+                                        <dt>
+                                                <a href="https://shop.foreverliving.com/distribNew/MemberReport.do?uid=32117932&amp;company=BGD" target="_blank">BONUS RECAP&nbsp;July 2023</a></dt>
+                                        </dl>
+                                      </div>
+                                  </div>
+                            </div>
+                </div>
+            </div>
+        <!--start CMS-->
+    <div id="standard_CMS"></div>
+    <!--end CMS--></div>
+                        </div>
+                </div>
+                
+
+
+
+
+<footer>
+  <div class="footer">
+    <ul>
+        
+        
+            <li><a onclick="window.open(&#39;https://gallery.foreverliving.com/gallery/FLP/download/Legal_Policies/Privacy_Notice_FLPI_FINAL_2020-02-20.pdf&#39;,&#39;&#39;,&#39;scrollbars=yes, resizable=yes,width=640,height=500&#39;)">Privacy Notice</a></li>
+        
+        <li><a href="https://shop.foreverliving.com/distribNew/WorldLocations.do">Global Offices</a></li>
+        <li><a href="https://shop.foreverliving.com/distribNew/Home.do">Home</a></li>
+        <li><a href="https://shop.foreverliving.com/distribNew/Shop.do">Aloe Store</a></li>
+        <li><a href="https://shop.foreverliving.com/distribNew/ContactUs.do?page=ContactUs">Contact Us</a></li>
+        <li><a href="https://shop.foreverliving.com/distribNew/Policies.do?page=Policies">Company Policy</a></li>
+        <li><a href="https://shop.foreverliving.com/distribNew/Faq.do?page=Faq">Help</a></li>
+    </ul>
+    <p class="copyright" style="direction: ltr;">
+        <span><img src="./index_files/icon_copyright.png">Copyright © 2025 Forever Living Products Bangladesh Limited All rights reserved.</span>
+    </p>
+  </div>
+</footer>
+
+
+
+</div>
+        <script type="text/javascript">
+jQuery(document).ready(function(){
+    $('ul.megamenu li.mm-item a.mm-item-link').filter(function(){return $.trim($(this).text()).length == 0 }).parent().hide()
+})
+
+</script>
+
+
+
+
+<div id="tipped" class="tipped" style="height: auto; width: auto; left: 770px; top: 78px; display: none;"><div id="tipped-content" class="mm-content-base" style="height: auto; width: auto;"></div><div id="tipped-closer-wrapper" style="display: none;"><span id="tipped-closer">Close</span></div></div>
+<script type="text/javascript" id="" charset="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","166502073747401");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=166502073747401&amp;ev=PageView&amp;noscript=1"></noscript>
+</body></html>

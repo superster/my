@@ -1,0 +1,262 @@
+/*
+Forever Living - plugins.js
+Plug-in Scripts (To reduce server calls, place all of your Plug-in scripts here stacked one on top of the other.)
+
+
+TOC:
+	1) Debug Console
+	2) Top Navigation Hover
+	3) Tool Tips
+
+*/
+
+//  1) Debug Console
+window.log = function(){
+  log.history = log.history || [];
+  log.history.push(arguments);
+  arguments.callee = arguments.callee.caller;
+  if(this.console) console.log( Array.prototype.slice.call(arguments) );
+};
+(function(b){function c(){}for(var d="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn".split(","),a;a=d.pop();)b[a]=b[a]||c})(window.console=window.console||{});
+
+//  2) Top Navigation Hover
+
+var isIE6 = navigator.userAgent.toLowerCase().indexOf('msie 6') != -1;								// Set IE6 flag
+jQuery('#megaMenu li div ul li,#languageLinks li div ul li').each(function(index, obj) {			// If the First LI contains an H2 tag,
+	if ((jQuery(this).index() == 0)) { var topH2 = jQuery(obj).find('h2').css('marginTop', '0'); }  // then remove its top margin.
+});
+jQuery('div.mm-item-content').css('display','block');												// Since we have JavaScript, show drop menu contents
+jQuery.fn.megamenu = function(options) {															// Default Options
+  options = jQuery.extend({
+	  activate_action: "mouseover",
+	  deactivate_action: "mouseleave",
+	  show_method: "slideDown",
+	  hide_method: "slideUp",
+	  justify: "left",
+	  mm_timeout: 250
+  }, options);
+
+  var $megamenu_object = this;
+  if( options.activate_action == "click" ) options.mm_timeout = 0;									// For Click actions (language/country)
+  		$megamenu_object.children("li").each(function() {
+			jQuery(this).addClass("mm-item");
+			jQuery(this).find("a:first").addClass("mm-item-link");
+			var $mm_item_content = jQuery(this).find(".mm-item-content");
+			var $mm_item_link = jQuery(this).find(".mm-item-link");
+			$mm_item_content.hide();
+
+			jQuery(document).bind("click", function() {
+			  jQuery(".mm-item-content").hide();
+			  jQuery(".mm-item-link").removeClass("mm-item-link-hover");
+			});
+		jQuery(this).bind("click", function(e){														// Since JavaScript is available, don't use href
+		  e.stopPropagation();
+		  //e.preventDefault();
+		});
+		$mm_item_content.wrapInner('<div class="mm-content-base"></div>');							// Wrap the container for padding and width control
+		$mm_item_link.append('<span></span>');														// For the right-edge of Global Nav tab
+    	var $mm_timer = 0;
+
+    	// Activation Method Starts
+    	jQuery(this).bind(options.activate_action, function(e){										// For Hover actions (global nav)
+		  	e.stopPropagation();
+		  	var mm_item_link_obj = jQuery(this).find("a.mm-item-link");
+		  	var mm_item_content_obj = jQuery(this).find("div.mm-item-content");
+		  	if (!mm_item_content_obj.length) mm_item_link_obj.addClass("no-sub-menu");
+
+      		clearTimeout($mm_timer);
+      		$mm_timer = setTimeout(function(){ 														// Emulate HoverIntent
+        		mm_item_link_obj.addClass("mm-item-link-hover");
+        		mm_item_content_obj.css({
+				  'width': mm_item_content_obj.width(),												// Get Width and Position parameters
+				  'top': ($mm_item_link.position().top + $mm_item_link.outerHeight()) - (isIE6 ? 15 : 12) +"px",
+				  'left': ($mm_item_link.position().left) + 3 + 'px'
+				})
+																									// Adjust for Language/Country Drops
+				if ($mm_item_link.outerHeight() < 26) mm_item_content_obj.css({'top':'26px','left': ($mm_item_link.position().left) - 13 + 'px'});
+
+        		if(options.justify == "left"){
+					var mm_object_right_end = $megamenu_object.position().left + $megamenu_object.outerWidth();
+																					// Coordinates of the right end of the megamenu object
+					var mm_content_right_end = $mm_item_link.position().left + $mm_item_content.outerWidth() - 5 ;
+																					// Coordinates of the right end of the megamenu content
+					if( mm_content_right_end >= mm_object_right_end ) { 			// Menu content exceeding the outer box
+						mm_item_content_obj.css({
+						  'left': ($mm_item_link.position().left - (mm_content_right_end - mm_object_right_end)) - 2 + 'px'
+						}); 														// Limit megamenu inside the outer box
+						mm_item_link_obj.addClass("right-adjusted");
+			  	}
+
+				} else if( options.justify == "right" ) {
+				  var mm_object_left_end = $megamenu_object.position().left;
+																					// Coordinates of the left end of the megamenu object
+				  var mm_content_left_end = $mm_item_link.position().left - mm_item_content_obj.outerWidth() +
+											$mm_item_link.outerWidth() + 5;
+																					// Coordinates of the left end of the megamenu content
+				  if( mm_content_left_end <= mm_object_left_end ) { 				// Menu content exceeding the outer box
+					mm_item_content_obj.css({
+					  'left': mm_object_left_end + 2 + 'px'
+					}); 															// Limit megamenu inside the outer box
+				  } else {
+					mm_item_content_obj.css({
+					  'left': mm_content_left_end + 'px'
+					}); 															// Limit megamenu inside the outer box
+				  }
+				}
+
+				switch(options.show_method) {										// Adjustments for animation types
+				  case "simple":
+						mm_item_content_obj.show();
+						break;
+				  case "slideDown":
+						mm_item_content_obj.height("auto");
+						mm_item_content_obj.slideDown('fast');
+						break;
+				  case "fadeIn":
+						mm_item_content_obj.fadeTo('fast', 1);
+						break;
+				  default:
+						mm_item_content_obj.each( options.show_method );
+						break;
+				}
+			  }, options.mm_timeout);
+		  });
+		  // Activation Method Ends
+		  // Deactivation Method Starts
+		  jQuery(this).bind(options.deactivate_action, function(e){
+			e.stopPropagation();
+			clearTimeout($mm_timer);
+			var mm_item_link_obj = jQuery(this).find("a.mm-item-link");
+			var mm_item_content_obj = jQuery(this).find("div.mm-item-content");
+			switch(options.hide_method) {											// Adjustments for animation types
+			  case "simple":
+					mm_item_content_obj.hide();
+					mm_item_link_obj.removeClass("mm-item-link-hover");
+					break;
+			  case "slideUp":
+					mm_item_content_obj.slideUp( 'fast',  function() {
+					  mm_item_link_obj.removeClass("mm-item-link-hover");
+					});
+					break;
+			  case "fadeOut":
+					mm_item_content_obj.fadeOut( 'fast', function() {
+					  mm_item_link_obj.removeClass("mm-item-link-hover");
+					});
+					break;
+			  default:
+					mm_item_content_obj.each( options.hide_method );
+					mm_item_link_obj.removeClass("mm-item-link-hover");
+					break;
+			}																		// For TABS with no sub menu (like the HOME link)
+			if(mm_item_content_obj.length < 1) mm_item_link_obj.removeClass("mm-item-link-hover");
+		  });
+	  //    Deactivation Method Ends
+	  });
+	  this.show();
+};
+
+// 3) Tool Tips
+/******
+ * Tipped: A tooltip plugin for jQuery
+ * http://www.augustana.ualberta.ca/tls/help/foss/tipped
+	/*	Options:
+
+			ajaxType:	The type of HTTP request to make.
+				Possible values: Anything $.ajax accepts (usually 'GET' or 'POST')
+				Default: 'POST'
+
+			cache:		Whether or not to cache AJAX requests.  Cache is based on URL, not URL + data, so if
+						you are making multiple requests to the same URL with different data, turn off cache
+				Default: false
+
+			closer:		The HTML to display when a tip is to be manually closed (ie: when triggered by a click).
+						All text in 'closer' will be injected inside another element that has the close listener
+				Default: 'Close'
+
+			delay:		The milliseconds to wait between when the trigger is hovered over, and the tip appears.
+						Ignored if "mode" is "click".
+				Default: 0
+
+			hideDelay:	The milliseconds to wait between when the trigger is hovered out, and the tip disappears.
+				Default: 0
+
+			marginX:	The pixels to the right of the element that the tip should appear.  This amount will be
+						overridden if necessary to ensure the entire tip shows on the screen.
+				Possible values: Any integer.  Negative numbers will position the tip to the left of the right
+								 edge of the triggering element
+				Default: '10'
+
+			marginY:	The pixels to the bottom of the element that the tip should appear.  This amount will be
+						overridden if necessary to ensure the entire tip shows on the screen.
+				Possible values: Any integer.  Negative numbers will position the tip above of the bottom
+								 edge of the triggering element
+				Default: '10'
+
+			mode:		The type of tip to make.  'Hover' shows and hides on hover, 'Click' is triggered with a
+						click and requires clicking of the closer to go away
+				Possible values: 'hover', 'click'
+				Default: 'hover'
+
+			oversizeStick:	Whether to revert to "click" mode if the content is too large for the screen.  If the
+							content is too large, scrollbars appear.  Users can't use those scrollbars though, if
+							the tooltip disappears when they hover off the target.  This will remedy that problem.
+
+							The 'closer' option will be used when necessary.
+				Possible values: true,false
+				Default: true
+
+			params:		An object representing the parameters to send along with an AJAX request as 'data'
+				Possible values:
+					A callback: Data passed will be the object returned from this function.  Function will be passed
+								a jQuery object representing the triggering element
+					An object: Will be used as the data
+				Default: {}
+
+			position:	The method Tipped will use to determine position.
+				Possible values:
+					'absolute': The position of the tip will be determined by the posX and posY parameters,
+								with no application of the margins and no consideration for where the triggering
+								element is
+					'mouse':	The position of the tip will be determined by the location of the mouse when the
+								tip is triggered. Margins will be applied.
+					'element':	The position of the tip will be determined by the bottom right corner of the
+								triggering element. Margins will be applied.
+				Default: 'element'
+
+			posX:	The absolute position on the x-axis the tooltip will have when displayed.  Only used if the
+					'position' option is "absolute"
+				Possible values:
+					A callback:  Function must return an integer.  Function will be passed a jQuery object
+								 representing the triggering element.
+					An integer
+				Default value: 0
+
+			posY:	The absolute position on the y-axis the tooltip will have when displayed.  Only used if the
+					'position' option is "absolute"
+				Possible values:
+					A callback:  Function must return an integer.  Function will be passed a jQuery object
+								 representing the triggering element
+					An integer
+				Default value: 0
+
+			source:		The source of the value to display.
+				Possible values:
+					'title':	Value to display will be pulled from the 'title' attribute of the triggering element
+					A callback: Value to display will be returned from the callback function.  Function will be passed
+								a jQuery object representing the triggering element
+					'url':		An AJAX request will be made to the address specified by the 'url' option
+					Any other string:	Will be displayed
+				Default: 'title'
+
+			themeroller:	Whether or not to make Themeroller compatible
+				Possible values: true, false
+				Default: false
+
+			throbber:	The URL to the image to display while the AJAX request is being sent.  If blank, no throbber
+						will be shown.
+				Default: false
+
+			url:		The web address to make the AJAX request to.  Unused if 'source' is not 'url'
+	*/
+
+ (function(b){var g={ajaxType:"POST",cache:false,cached:{},closer:"Close",delay:0,hideDelay:0,marginX:-5,marginY:-5,mode:"hover",oversizeStick:true,params:{},position:"mouse",posX:0,posY:0,source:"title",themeroller:false,throbber:false,url:""};window.Tip={$tip:{},$content:{},timer:undefined,settings:{},$target:{},evt:false,init:function(){this.$tip=b("#tipped").length==0?b('<div id = "tipped" class="tipped"><div id = "tipped-content" class="mm-content-base"></div><div id = "tipped-closer-wrapper"><span id = "tipped-closer">'+this.settings.closer+ "</span></div>").appendTo(document.body).data("showing",false):b("#tipped");this.$content=b("#tipped-content")},setup:function(a,c,d){this.settings=c;this.$target=a;this.evt=d;this.hide(true);this._setupCloser();this._setupThemeRollerCompat();this._removeTitle();clearTimeout(this.timer)},show:function(){if(this.settings.source==="url")this._showURL();else if(this.settings.source==="title")this._display(this.$target.data("tipped").title);else if(typeof this.settings.source=="string")this._display(this.settings.source); else if(typeof this.settings.source=="function")this._display(this.settings.source(this.$target));else typeof settings.source=="object"&&this._display(this.settings.source.html())},hide:function(a){if(arguments.length==0)a=false;if(a){this.$tip.data("showing",false).data("original","").hide();this.$content.html("")}else{this.$tip.hover(function(){clearTimeout(Tip.timer)},function(){Tip.hide(true)});this.timer=setTimeout(function(){Tip.hide(true)},Tip.settings.hideDelay)}},_setupCloser:function(a){if(arguments.length== 0)a=false;b("#tipped-closer").html(this.settings.closer).click(function(){Tip.hide(true)});this.settings.mode!="click"&&!a?b("#tipped-closer-wrapper").hide():b("#tipped-closer-wrapper").show()},_setupThemeRollerCompat:function(){if(this.settings.themeroller){this.$tip.addClass("ui-helper-hidden ui-widget ui-dialog ui-corner-all");b("#tipped-closer").addClass("ui-button ui-state-hover ui-state-default").hover(function(){b(this).addClass("ui-state-hover")},function(){b(this).removeClass("ui-state-hover")}).mousedown(function(){b(this).addClass("ui-state-active")}).mouseup(function(){b(this).removeClass("ui-state-active")})}else{this.$tip.removeClass("ui-helper-hidden ui-widget ui-dialog ui-corner-all"); b("#tipped-closer").removeClass("ui-button ui-state-hover ui-state-default")}},_removeTitle:function(){var a=this.$target.data("tipped");if(a.title===undefined){a.title=this.$target.attr("title");this.$target.data("tipped",a)}this.$target.removeAttr("title").attr("title","")},_showURL:function(){var a=this.$tip.data("cache");if(!this.settings.cache||a===undefined||a[this.settings.url]===undefined){var c={};if(typeof this.settings.params=="function")c=this.settings.params(this.$target);else if(typeof this.settings.params== "object")c=this.settings.params;$this=this;b.ajax({data:c,type:$this.settings.ajaxType,url:$this.settings.url,beforeSend:function(){$this.settings.throbber&&$this._display("<img src = "+$this.settings.throbber+' alt = "Loading..." />')},error:function(){$this._display("Unable to retrieve contents")},success:function(d){$this._display(d);if($this.settings.cache){var e={};e[$this.settings.url]=d;a=b.extend(a,e);$this.$tip.data("cache",a)}}})}else this._display(a[this.settings.url])},_display:function(a, c){c=c==undefined?false:c;if(this.settings.delay&&!c)setTimeout('Tip._display("'+a+'",true)',this.settings.delay);else{this.$content.html(a);this._setSize();this._setPosition();this.$tip.data("showing",true).data("original",this.$target).show();this._resizeAfterShow()}},_setSize:function(){this.$content.css({height:"auto",width:"auto"});this.$tip.css({height:"auto",width:"auto"});if(this.$tip.outerHeight()>b(window).height()){if(this.settings.oversizeStick){this._setupCloser(true);this.$target.unbind("mouseout")}var a= this.$tip.outerHeight()-this.$tip.height();this.$tip.css("height",b(window).height()-a-10);this.$content.css({height:b(window).height()-a-10,width:this.$tip.outerWidth()+20,overflow:"auto"})}this.$tip.outerWidth()+10>=b(window).width()&&this.$tip.css({height:this.$tip.outerHeight(),width:b(window).width()-20,overflow:"auto"})},_resizeAfterShow:function(){var a=b("#tipped-closer-wrapper");if(a.is(":visible")){a=a.outerHeight();this.$content.height(this.$tip.height()-a)}},_setPosition:function(){this.$tip.css({left:0, top:0});var a={x:0,y:0};a=this._calcInitialPosition(a);a=this._adjustPositionForWindow(a);a=this._adjustPositionForMouse(a);this.$tip.css({left:a.x,top:a.y})},_calcInitialPosition:function(a){switch(this.settings.position){case "mouse":a.x=this.evt.pageX+this.settings.marginX;a.y=this.evt.pageY+this.settings.marginY;break;case "absolute":a.x=typeof this.settings.posX=="function"?this.settings.posX($target):this.settings.posX;a.y=typeof this.settings.posY=="function"?this.settings.posY($target):this.settings.posY; break;default:var c=this.$target.offset();a.x=c.left+this.$target.outerWidth()+this.settings.marginX;a.y=c.top+this.$target.outerHeight()+this.settings.marginY}return a},_adjustPositionForWindow:function(a){var c=a.x+this.$tip.outerWidth(),d=a.y+this.$tip.outerHeight(),e=b(window).width()+b(window).scrollLeft()-5,f=b(window).height()+b(window).scrollTop()-5;a.x=c>e?a.x-(c-e):a.x;a.y=d>f?a.y-(d-f):a.y;return a},_adjustPositionForMouse:function(a){if(this.settings.position!="absolute"){var c=this.evt.pageX, d=this.evt.pageY,e=this.$tip.outerWidth(),f=this.$tip.outerHeight();if(a.x<c&&a.x+e>c)if(a.y<d&&a.y+f>d)a.x=this.settings.position=="mouse"?c-e-this.settings.marginX:this.$target.offset().left-e-this.settings.marginX}return a}};b(document).ready(function(){Tip.init()});b.fn.tipped=function(a){this.each(function(){$target=b(this);a=b.extend({},g,a);$target.data("tipped",a);if(a.mode=="hover")$target.mouseover(function(c){Tip.setup(b(this),a,c);Tip.show()}).mouseout(function(){Tip.hide()});else a.mode== "click"&&$target.click(function(c){clickedSettings=b(this).data("tipped");Tip.setup(b(this),clickedSettings,c);Tip.show()})});return this};b.extend({getTrigger:function(){return $tip.data("original")}})})(jQuery);

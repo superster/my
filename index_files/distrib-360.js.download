@@ -1,0 +1,336 @@
+// JavaScript Document
+$(document).ready(function () {
+
+
+    $("a.greenBT[href='/distribNew/MyFlpBiz.do?action=setupName'], #FLP_BizTour1, img[src='images/MyFLP_BizLogo.png'], div#byow").remove();
+
+    //update flpbiz.do page
+	$("a[href='https://www.foreverliving.com/distribNew/MyFlpBiz.do?action=setupName']").parent().remove();
+
+
+	if (window.location.href.indexOf("MyFlpBiz.do") > -1) { //on my flp biz page writ 360 content
+
+        $(".main > #standard_CMS").html("<div id='360FLP_pg' style='text-align:center;'></div>");
+
+    }
+
+
+    $("img[src='https://www.foreverliving.com/distribNew/images/MyFLP_BizLogo.png']").remove();
+
+
+    ///check for home store if true  fire function
+    var homeStore = $("meta[name='flp:store']").attr("data-company");
+    var thisStore = $("meta[name='flp:member']").attr("data-company");
+    var siteCreationEligible = $("meta[name='flp:siteCreationEligible']").attr("data-eligible");
+
+    loadFlp360Access();
+
+    function byowReplace() {
+
+            var lang = $("meta[name='flp:language']").attr("content");
+
+            if (siteCreationEligible == "Y") {
+                $(".right-rail > .columnModule").next("div.module").before("<div id='home360' class='module'></div>");
+            } //end if this is home store
+
+            //for FLP biz page
+            $("#360FLP_pg").html("<a href='FLP360.do' target='_blank'><div style='width:170px; margin: 0 auto 0 auto;'>" +
+                "<img src='https://gallery.foreverliving.com/gallery/FLP/image/Marketing/FLP360.png' /></div><br/><h5 id='360Text'></h5></a><div style='text-align:center;'>" +
+                "<a href='http://www.discoverforever.com/flp360/index.html' target='_blank' class='greenBT' id='learnBT' ></a> &#32; " +
+                "<a href='FLP360.do' target='_blank' class='greenBT' id='enrollBT' ></a><h5 style='padding-top:10px;'><a href='FLP360.do?action=login' target='_blank' id='logInHere'></a><h5></div>");
+
+            //for home page
+            $("#home360").html("<a href='FLP360.do' target='_blank'><div style='width:170px; margin: 0 auto 0 auto;'><img src='https://gallery.foreverliving.com/gallery/FLP/image/Marketing/FLP360_New.png' /></div><br/><h5 id='360Text'></h5></a><a href='http://www.discoverforever.com/flp360/index.html' target='_blank' class='greenBT' id='learnBT' style='width:90%; text-align:center;'></a> <br/> <a href='FLP360.do' target='_blank' class='greenBT' id='enrollBT'  style='width:90%; text-align:center; margin-top:5px;'></a><h5 style='padding-top:10px;'><a href='FLP360.do?action=login' target='_blank' id='logInHere'></a><h5>");
+
+            $( "#learnBT" ).attr( 'href', 'http://foreverliving.com/page/flp360/' + homeStore + '/' + lang );
+
+            if (lang == "en") { //english 1
+                $("#360Text").html("Get a complete 360 view of your Forever business.");
+                $("#learnBT").text("LEARN MORE");
+				$("#enrollBT").text("ENROLL");
+				$("#logInHere").html("Already a member? Click here to login.");
+            }
+
+            if (lang == "az") { // Azerbaijani 2
+                $("#360Text").html("Əbədi biznesinizin 360 dərəcə bütöv görüntüsünü əldə edin.");
+                $("#learnBT").text("Daha etraflı");
+				$("#enrollBT").text("Qeydiyyatdan keç");
+				$("#logInHere").html("Artıq qeydiyyatdan keçmisen? Daxil olmaq üçün buranı sıxın");				
+            }
+
+            if (lang == "de") { // SWITZERLAND 3 (German)
+                $("#360Text").html("Verschaffen Sie sich einen 360-Grad-Rundum-Blick über Ihr Forever-Geschäft!");
+                $("#learnBT").text("Erfahre mehr");
+                $("#enrollBT").text("Einschreiben");
+                $("#logInHere").html("Bereits ein Mitglied? Klicken Sie hier, um sich einzuloggen");
+            }
+
+            if (lang == "cs") { //   CZECH REPUBLIC 4
+                $("#360Text").html("Získejte kompletní a všezahrnující pohled na své podnikání s Forever");
+                $("#learnBT").text("Více informací");
+				$("#enrollBT").text("Zapište se");
+				$("#logInHere").html("Jste již členem? Kliknutím sem se můžete přihlásit");
+            }
+
+            if (lang == "fr") { //   ALGERIA 5 (French)
+                $("#360Text").html("Ayez une vue d'ensemble sur votre activité Forever");
+                $("#learnBT").text("En savoir plus");
+				$("#enrollBT").text("Inscrivez-vous");
+				$("#logInHere").html("Déjà membre ? Cliquez ici pour vous connecter");				
+            }
+
+            if (lang == "et") { //  Estonia 6
+                $("#360Text").html("Saa täielik ülevaade oma Forever'i ärist");
+                $("#learnBT").text("Loe lisaks");
+				$("#enrollBT").text("Registreeru");
+				$("#logInHere").html("Oled juba liige? Sisselogimiseks klõpsa siia");				
+            }
+
+            if (lang == "lt") { //  Lithuanian 7
+                $("#360Text").html("Pamatyk savo „Forever“ verslą iš visų pusių");
+                $("#learnBT").text("Sužinokite daugiau");
+				$("#enrollBT").text("Registruotis");
+				$("#logInHere").html("Jau narys? Spustelėk čia prisijungdamas");				
+            }
+
+            if (lang == "lv") { //  Latvian 8
+                $("#360Text").html("Pamatyk savo „Forever“ verslą iš visų pusių");
+                $("#learnBT").text("Uzzināt vairāk");
+				$("#enrollBT").text("Pieteikties");
+				$("#logInHere").html("Jau esi biedrs? Klikšķini šeit, lai pieslēgtos");				
+            }
+
+            if (lang == "ru") { //  Russian 9
+                $("#360Text").html("Получите полный (360 градусов) обзор вашего Forever бизнеса");
+                $("#learnBT").text("Узнать больше");
+				$("#enrollBT").text("Зарегистрироваться");
+				$("#logInHere").html("Уже участник? Нажмите здесь, чтобы войти");				
+            }
+
+            if (lang == "it") { //  Italian 10
+                $("#360Text").html("Ottieni una visione a 360° di tutti gli affari che fai con Forever");
+                $("#learnBT").text("Scopri di più");
+				$("#enrollBT").text("Affiliati");
+				$("#logInHere").html("Già membro? Clicca qui per accedere");				
+            }
+
+            if (lang == "nl") { //  Nederlands (Dutch) 11
+                $("#360Text").html("Een compleet  360°  overzicht van uw bedrijf Forever");
+                $("#learnBT").text("Ontdek meer");
+				$("#enrollBT").text("Aanmelden");
+				$("#logInHere").html("Al lid? Klik hier om in te loggen");				
+            }
+
+            if (lang == "pt") { // Português 12
+                $("#360Text").html("Obtenha uma vista completa de 360° do seu negócio Forever");
+                $("#learnBT").text("Saiba Mais");
+				$("#enrollBT").text("Enroll");
+				$("#logInHere").html("Já é membro? Clique aqui para fazer login.");				
+            }
+
+            if (lang == "sk") { // Slovak 13
+                $("#360Text").html("Doprajte si 360 pohľad na vaše podnikanie Forever");
+                $("#learnBT").text("Zistite Viac");
+				$("#enrollBT").text("Zaregistrovať sa");
+				$("#logInHere").html("Už ste členom? Kliknite sem a prihláste sa");				
+            }
+
+            if (lang == "es") { // Spanish 14
+                $("#360Text").html("Obtenga una vista completa 360 de su negocio Forever");
+                $("#learnBT").text("Más información");
+				$("#enrollBT").text("Inscribirse");
+				$("#logInHere").html("¿Ya eres miembro? Haz clic para iniciar sesión");				
+            }
+
+            if (lang == "el") { // Greek 15
+                $("#360Text").html("Αποκτήστε την ολοκληρωμένη εικόνα της Forever επιχείρησής σας");
+                $("#learnBT").text("Μάθετε Περισσότερα");
+				$("#enrollBT").text("Εγγραφή");
+				$("#logInHere").html("Είστε Ήδη Μέλος; Κλικ Εδώ Για Να Συνδεθείτε");				
+            }
+
+            if (lang == "da") { // Danish 16
+                $("#360Text").html("Få et komplet 360 graders overblik over din Forever-virksomhed");
+                $("#learnBT").text("Lær Mere");
+				$("#enrollBT").text("Tilmeld dig");
+				$("#logInHere").html("Allerede medlem? Klik her for at logge ind");				
+
+            }
+
+            if (lang == "fi") { // Finnish 17
+                $("#360Text").html("Hanki täysi 360-asteen näkymä Forever-yrityksestäsi");
+                $("#learnBT").text("Lue lisää");
+				$("#enrollBT").text("Liity");
+				$("#logInHere").html("Oletko jo jäsen? Klikkaa tästä kirjautuaksesi sisään");				
+
+            }
+
+            if (lang == "hu") { // Hungarian 18
+                $("#360Text").html("Nyerjen 360 fokos rálátást Forever üzletére!");
+                  $("#learnBT").text("TOVÁBBI INFORMÁCIÓ");
+                  $("#enrollBT").text("REGISZTRÁCIÓ");
+                  $("#logInHere").html("Már regisztrált? Kattintson ide a bejelentkezéshez!");
+
+            }
+
+            if (lang == "sq") { // Albanian 19
+                $("#360Text").html("Hidhni një vështrim prej 360 gradësh tek biznesi juaj Forever");
+                $("#learnBT").text("Informohu më shumë");
+				$("#enrollBT").text("Regjistrohu");
+				$("#logInHere").html("Je regjistruar paraprakisht? Kliko këtu për hyrje");
+            }
+
+            if (lang == "hr") { // Croatian 20
+                $("#360Text").html("Dobijte kompletni 360° uvid u vaš Forever biznis");
+                $("#learnBT").text("Saznajte više");
+				$("#enrollBT").text("Upis");
+				$("#logInHere").html("Već ste član? Kliknite ovdje kako biste se prijavili");
+            }
+
+
+            if (lang == "sr") { // Serbian 21
+                $("#360Text").html("Обезбедите себи потпуну слику свог Forever пословања, од 360 степени");
+                $("#learnBT").text("Сазнајте више");
+				$("#enrollBT").text("Регистровање");
+				$("#logInHere").html("Већ сте члан? Кликните овде да се пријавите");				
+            }
+
+            if (lang == "sl") { // Slovenian 22
+                $("#360Text").html("Prejmite popoln pregled vašega Forever poslovanja");
+                $("#learnBT").text("Izvedite več");
+				$("#enrollBT").text("Vpišite se");
+				$("#logInHere").html("Ste že član? Kliknite tukaj za prijavo");				
+
+            }
+
+
+            if (lang == "iw") { // Hebrew 23
+                $("#360Text").html("קבלו תצוגה מלאה של 360 מעלות של עסק ה-Forever שלכם");
+                $("#learnBT").text("למידע נוסף");
+                $("#360Text").css("direction", "rtl"); //text right to left
+				$("#enrollBT").text("להרשמה");
+				$("#logInHere").html("כבר רשום/ה? הקש/י כאן לכניסה למערכת");				
+            }
+
+            if (lang == "tr") { // Turkish 24
+                $("#360Text").html("Forever faaliyetlerinize eksiksiz bir 360 derece bakışa ulaşın.");
+                $("#learnBT").text("Daha Fazla Bilgi Edinin");
+				$("#enrollBT").text("Kaydol");
+				$("#logInHere").html("Zaten Üye misin? Oturum açmak için Buraya Tıkla");				
+            }
+
+            if (lang == "pl") { // Polish 25
+                $("#360Text").html("Pobierz pełen, 360 ° widok na swój Forever Business");
+                $("#learnBT").text("Dowiedz się więcej");
+				$("#enrollBT").text("Zapisz się");
+				$("#logInHere").html("Jesteś już członkiem? Kliknij tu, by się zalogować");				
+            }
+
+
+            if (lang == "ro") { // Romanian 26
+                $("#360Text").html("Obțineți o vedere completă, de 360°, a afacerii dvs. Forever");
+                $("#learnBT").text("Aflați mai mult");
+				$("#enrollBT").text("Înscriere");
+				$("#logInHere").html("Sunteți deja membru? Apăsați aici pentru a vă conecta");				
+
+            }
+
+            if (lang == "no") { // Norwegian 27
+                $("#360Text").html("Få en komplett 360 graders visning av din Forever-business");
+                $("#learnBT").text("Lær mer");
+				$("#enrollBT").text("Registrer");
+				$("#logInHere").html("Allerede medlem? Klikk her for å logge inn");				
+            }
+
+            if (lang == "sv") { // Swedish 28
+                $("#360Text").html("Få en total 360 graders översikt av ditt Forever business");
+                $("#learnBT").text("Lär dig mer");
+				$("#enrollBT").text("Gå med");
+				$("#logInHere").html("Redan medlem? Klicka här för att logga in");				
+            }
+
+            if (lang == "ar") { // Arabic 29
+                $("#360Text").html("احصل على 360 صورة كاملة حول نشاطك مع Forever");
+                $("#learnBT").text("اعرف المزيد");
+                $("#360Text").css("direction", "rtl"); //text right to left
+				$("#enrollBT").text("سجل");
+				$("#logInHere").html("عضو بالفعل؟ انقر هنا لتسجيل الدخول");				
+            }
+
+            if (lang == "zh") { // Chinese 30
+                $("#360Text").html("对您永久的事业做一次360度的观察。");
+                $("#learnBT").text("更多信息");
+				$("#enrollBT").text("註冊");
+				$("#logInHere").html("已經是會員？按這裡登錄");
+            }
+
+            if (lang == "vi") { // vietnamese 31
+                $("#360Text").html("Có cái nhìn 360 độ đầy đủ về kinh doanh Forever của bạn");
+                $("#learnBT").text("Tìm hiểu thêm");
+				$("#enrollBT").text("Tham gia");
+				$("#logInHere").html("Bạn đã là Thành viên? Nhấn vào Đây để Đăng nhập");				
+            }
+
+            if (lang == "bg") { // Bulgarian 32
+                $("#360Text").html("Получете всестранен поглед върху Вашия Форевър бизнес.");
+                $("#learnBT").text("Научете повече");
+				$("#enrollBT").text("Регистрирайте се");
+				$("#logInHere").html("Вече сте член? Кликнете тук, за да влезете.");				
+            }
+
+            if (lang == "mk") { // Macedonian 33
+                $("#360Text").html("Добијте комплетен поглед од 360 степени на вашиот Засекогаш бизнис");
+                $("#learnBT").text("Дознајте повеќе");
+				$("#enrollBT").text("Зачленете се");
+				$("#logInHere").html("Веќе сте член? Кликнете овде за да се логирате");				
+            }
+
+
+            if (lang == "mn") { // Mongolian 34
+                $("#360Text").html("Та бизнесийнхээ дүр зургийг 360 градусаар хараарай");
+                $("#learnBT").text("Илүү ихийг олж мэдэх");
+				$("#enrollBT").text("Элсэх");
+				$("#logInHere").html("Аль хэдийн гишүүн болсон уу? Нэвтрэхийн тулд энд товшино уу");				
+            }
+
+
+
+            ///if "learn more" button has no text/value, remove it
+            var learnMore = $("#learnBT").text();
+            if (learnMore == "") {
+                $("#learnBT").remove();
+            }
+
+
+        } //end byowReplace()
+
+
+
+    ////////////////////////////////////////////Start 360 true false****************
+
+    function loadFlp360Access() {
+        var data = document.getElementById("flp360Access").value;
+        var json = JSON.parse(data);
+
+        if(json != null){
+            var country = json.country;
+            var store360 = json.flp360Access;
+
+            var flp360EnabledId =document.getElementById("flp360Enabled");
+            var flp360Enabled='';
+            if(flp360EnabledId){
+                flp360Enabled=flp360EnabledId.value;
+            }
+
+            var allow = false;
+            if(country == "ZAF" && thisStore == "BWA"){
+                allow = true;
+            }
+
+            if (((thisStore == country) || allow) && (store360 === "Y") && (flp360Enabled == "true")) {
+                byowReplace();
+            }
+        }
+    }
+
+}); //end ready

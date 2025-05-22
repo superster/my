@@ -1,0 +1,59 @@
+/* 
+Forever Living - scripts.js
+Global jQuery-based Scripts
+
+
+TOC:
+	1) JavaScript toggle (removes class="no-js" from <html> tag for Script Enabled Browsers)
+	2) Toggle field values
+	3) MegaMenu Global Navigation Dropdown
+	X) Doc ready functions (always last)
+
+*/
+
+
+
+//  1) JavaScript toggle (removes class="no-js" from <html> tag for Script Enabled Browsers)
+
+function removeJS() {
+	$('html').removeClass('no-js');
+};
+// 2) Toggle field values
+//    Removes the default value onfocus, and adds back if nothing entered 
+function fieldClear(obj) {
+	if(obj.Val) {
+		if (obj.value == '') { 
+			obj.value = obj.Val;
+			obj.Val = null;
+			obj.first = null;
+		} 
+		else {
+			obj.Val = null;
+		}
+	} else if (!obj.first) { 
+		obj.Val = obj.value;
+		obj.value = ''; 
+		obj.first = 'true';
+	} 
+}
+// List out Input Items here to add to Field Clearing
+function setFieldClear(){ 
+	$('#globalSearch input[type="text"]').focus(function() { fieldClear(this); }).blur(function() { fieldClear(this); });
+};
+
+// 3) MegaMenu Global Navigation Dropdown
+function startMegaMenu(){
+	jQuery('#megaMenu').megamenu();
+    // Deactivation_action is being disabled because of a the way Chrome (version 41, 42) behaves while interacting with this.
+	jQuery('#languageLinks').megamenu({ 'activate_action':'click','justify':'none', 'deactivate_action': 'HOLD' });
+};
+
+
+// X) Doc ready functions (always last)
+
+$(document).ready(function(){																		
+	removeJS();					// JavaScript toggle (removes class="no-js" from <html> tag for Script Enabled Browsers)
+	setFieldClear();			// Toggle field values (removes the default value onfocus, and adds back if nothing entered)
+	startMegaMenu();			// MegaMenu Global Navigation Dropdown
+});
+
